@@ -10,6 +10,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 /**
@@ -53,6 +54,7 @@ public class Person implements UserDetails {
     this.id = id;
   }
 
+  @Override
   public String getUsername() {
     return username;
   }
@@ -83,9 +85,11 @@ public class Person implements UserDetails {
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
-    return List.of();
+
+    return List.of(new SimpleGrantedAuthority(role.getName()));
   }
 
+  @Override
   public String getPassword() {
     return password;
   }

@@ -37,6 +37,19 @@ public class TokenService {
   }
 
   /**
+   * Validate token string.
+   *
+   * @param token the token
+   * @return the string
+   */
+  public String validateToken(String token) {
+    return JWT.require(this.algorithm)
+        .build()
+        .verify(token)
+        .getSubject();
+  }
+
+  /**
    * Generate expiration instant.
    *
    * @return the instant
